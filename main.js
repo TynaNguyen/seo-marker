@@ -24,7 +24,7 @@ initZohoApp = () => {
       appName: "mini-zalo-app-connection",
       reportName: "SEO_Remaker_Report",
       page: "1",
-      pageSize: "1000",
+      pageSize: "200",
     };
     console.log("fetchArticle", config);
     try {
