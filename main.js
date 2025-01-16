@@ -75,7 +75,6 @@ renderArticleHTML = (articleListDiv) => {
       const articalDiv = document.createElement("div");
   
       const articalTitle = document.createElement("p");
-
       const articalTitleSpan1 = document.createElement("span");
       articalTitleSpan1.textContent = "Tiêu đề: ";
       const articalTitleSpan2 = document.createElement("span");
@@ -83,7 +82,41 @@ renderArticleHTML = (articleListDiv) => {
       articalTitle.appendChild(articalTitleSpan1);
       articalTitle.appendChild(articalTitleSpan2);
       articalDiv.appendChild(articalTitle);
+
+      const articalLink = document.createElement("p");
+      const articalLinkSpan1 = document.createElement("span");
+      articalLinkSpan1.textContent = "Link: ";
+      const articalLinkSpan2 = document.createElement("a");
+      articalLinkSpan2.href = article.Link;
+      articalLinkSpan2.textContent = article.Link;
+      articalLink.appendChild(articalLinkSpan1);
+      articalLink.appendChild(articalLinkSpan2);
+      articalDiv.appendChild(articalLink);
+      
+
+      const articalKey = document.createElement("p");
+      const articalKeySpan1 = document.createElement("span");
+      articalKeySpan1.textContent = "Main keyword: ";
+      const articalKeySpan2 = document.createElement("span");
+      articalKeySpan2.textContent = article.Main_keyword;
+      articalKey.appendChild(articalKeySpan1);
+      articalKey.appendChild(articalKeySpan2);
+      articalDiv.appendChild(articalKey);
+
+      const articalContent = document.createElement("div");
+      articalContent.textContent = article.Main_content;
+      articalDiv.appendChild(articalContent);
+
+
+
       articleListDiv.appendChild(articalDiv);
+      
+      
+     
+      
+      
+      
+      
     }
   }
   
