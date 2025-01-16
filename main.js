@@ -50,7 +50,7 @@ fetchArticle = async (angleQuery = '') => {
     console.log("fetchArticle", articles.length);
     const articleListDiv = document.getElementById("articleList");
     if (articleListDiv) {
-      renderArticleHTML(articleListDiv);
+      renderArticleHTML(articleListDiv, angleQuery);
     }
 
   } catch (err) {
@@ -59,7 +59,7 @@ fetchArticle = async (angleQuery = '') => {
   }
 };
 
-fetchArticleWithPaginate = async (angleQuery = '', page = 1, pageSize = 200) => {
+fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
   console.log("fetchArticleWithPaginate", page, pageSize);
   const articlesResponse = [];
   //configuration json
@@ -69,9 +69,6 @@ fetchArticleWithPaginate = async (angleQuery = '', page = 1, pageSize = 200) => 
     page: `${page}`,
     pageSize: `${pageSize}`,
   };
-  if (angleQuery.length > 0) {
-    config.criteria = `(angle = "${angleQuery}")`;
-  }
   console.log("fetchArticleWithPaginate", config);
   try {
     //get all records API
@@ -108,7 +105,7 @@ fetchArticleWithPaginate = async (angleQuery = '', page = 1, pageSize = 200) => 
 };
 
 // cartOnProcess = false;
-renderArticleHTML = (articleListDiv) => {
+renderArticleHTML = (articleListDiv, angleQueryID = '') => {
   console.log("renderArticleHTML", articles.length);
   // if(cartOnProcess) return;
   articleListDiv.innerHTML = "";
@@ -169,9 +166,9 @@ renderArticleHTML = (articleListDiv) => {
     });
     articalContent.innerHTML = makeup_content;
     articalDiv.appendChild(articalContent);
-
-    articleListDiv.appendChild(articalDiv);
-
+    if (angleQueryID.length === 0 || articleRecord.Angle === angleQueryID) {
+      articleListDiv.appendChild(articalDiv);
+    }
 
 
 
