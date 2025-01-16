@@ -113,13 +113,13 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
     const articalDiv = document.createElement("div");
-    articalDiv.className("p-8");
+    articalDiv.className = "p-8";
     const articalTitle = document.createElement("p");
     const articalTitleSpan1 = document.createElement("span");
     articalTitleSpan1.textContent = `${i}. Tiêu đề: `;
-    articalTitleSpan1.className("font-semibold text-lg");
+    articalTitleSpan1.className = "font-semibold text-lg";
     const articalTitleSpan2 = document.createElement("span");
-    articalTitleSpan2.className("text-lg");
+    articalTitleSpan2.className = "text-lg";
     articalTitleSpan2.textContent = articleRecord.Title;
     articalTitle.appendChild(articalTitleSpan1);
     articalTitle.appendChild(articalTitleSpan2);
