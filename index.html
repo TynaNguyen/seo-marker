@@ -41,7 +41,8 @@
                   var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
                   console.log("queryParams", queryParams);
                   angleQuery = queryParams.angle;
-                  await fetchArticle(angleQuery);
+                  keySearch = queryParams.keysearch;
+                  await fetchArticle(angleQuery, keySearch);
 
                 })}
                 catch (err) {

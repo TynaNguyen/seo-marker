@@ -15,7 +15,7 @@ initZohoApp = () => {
 };
 let articles = [];
 let allMainKeywords = [];
-fetchArticle = async (angleQuery = '') => {
+fetchArticle = async (angleQuery = '', keySearch = '') => {
   console.log("fetchArticle");
   articles = [];
   allMainKeywords = [];
@@ -50,7 +50,7 @@ fetchArticle = async (angleQuery = '') => {
     console.log("fetchArticle", articles.length);
     const articleListDiv = document.getElementById("articleList");
     if (articleListDiv) {
-      renderArticleHTML(articleListDiv, angleQuery);
+      renderArticleHTML(articleListDiv, angleQuery, keySearch);
     }
 
   } catch (err) {
@@ -105,7 +105,7 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
 };
 
 // cartOnProcess = false;
-renderArticleHTML = (articleListDiv, angleQueryID = '') => {
+renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   console.log("renderArticleHTML", articles.length);
   // if(cartOnProcess) return;
   articleListDiv.innerHTML = "";
@@ -116,7 +116,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '') => {
 
     const articalTitle = document.createElement("p");
     const articalTitleSpan1 = document.createElement("span");
-    articalTitleSpan1.textContent = `${i++}. Tiêu đề: `;
+    articalTitleSpan1.textContent = `${i}. Tiêu đề: `;
     const articalTitleSpan2 = document.createElement("span");
     articalTitleSpan2.textContent = articleRecord.Title;
     articalTitle.appendChild(articalTitleSpan1);
@@ -167,7 +167,10 @@ renderArticleHTML = (articleListDiv, angleQueryID = '') => {
     articalContent.innerHTML = makeup_content;
     articalDiv.appendChild(articalContent);
     if (!angleQueryID || angleQueryID.length === 0 || articleRecord.Angle === angleQueryID) {
-      articleListDiv.appendChild(articalDiv);
+      if (!keySearch || keySearch.length === 0 || containsKeyword(articleRecord.Title, keySearch)) {
+        i++;
+        articleListDiv.appendChild(articalDiv);
+      }
     }
 
 
@@ -176,4 +179,9 @@ renderArticleHTML = (articleListDiv, angleQueryID = '') => {
 
 
   }
+}
+
+containsKeyword = (text, keyword) => {
+  const regex = new RegExp(keyword, 'i');
+  return regex.test(text);
 }
