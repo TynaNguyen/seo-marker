@@ -37,7 +37,11 @@
                   // getExistedUser(initparams.loginUser);
                   userId = initparams.loginUser;
 
-                  await fetchArticle();
+
+                  var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
+                  console.log("queryParams", queryParams);
+                  angleQuery = queryParams.angle;
+                  await fetchArticle(angleQuery);
 
                 })}
                 catch (err) {

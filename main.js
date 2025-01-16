@@ -15,12 +15,12 @@ initZohoApp = () => {
 };
 let articles = [];
 let allMainKeywords = [];
-fetchArticle = async () => {
+fetchArticle = async (angleQuery = '') => {
   console.log("fetchArticle");
   articles = [];
   allMainKeywords = [];
   try {
-    const articlesResponse = await fetchArticleWithPaginate();
+    const articlesResponse = await fetchArticleWithPaginate(angleQuery);
     console.log("fetchArticle/articlesResponse", articlesResponse.length);
     Array.prototype.push.apply(articles, articlesResponse);
     if (articlesResponse.length === 200) {
@@ -59,7 +59,7 @@ fetchArticle = async () => {
   }
 };
 
-fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
+fetchArticleWithPaginate = async (angleQuery = '', page = 1, pageSize = 200) => {
   console.log("fetchArticleWithPaginate", page, pageSize);
   const articlesResponse = [];
   //configuration json
@@ -69,6 +69,9 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
     page: `${page}`,
     pageSize: `${pageSize}`,
   };
+  if (angleQuery.length > 0) {
+    config.criteria = `(angle = ${angleQuery})`;
+  }
   console.log("fetchArticleWithPaginate", config);
   try {
     //get all records API
@@ -85,6 +88,7 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
               Link: angle.Link,
               Main_content: angle.Main_content,
               Makeup_content: "",
+              Angle: angle.Angle,
             });
           }
         } else {
@@ -156,7 +160,7 @@ renderArticleHTML = (articleListDiv) => {
         makeup_content = makeup_content.replace(regex, match => {
           if (!isFirst) {
             isFirst = true
-            return `<a href="${element.Link}">${match}</a>`;
+            return `<a style="color:blue;text-decoration: underline;" href="${element.Link}">${match}</a>`;
           } else {
             return `<span style='color:pink'>${match}</span>`;
           }
