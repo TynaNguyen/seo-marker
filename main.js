@@ -113,11 +113,13 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
     const articalDiv = document.createElement("div");
-
+    articalDiv.className("p-8");
     const articalTitle = document.createElement("p");
     const articalTitleSpan1 = document.createElement("span");
     articalTitleSpan1.textContent = `${i}. Tiêu đề: `;
+    articalTitleSpan1.className("font-semibold text-lg");
     const articalTitleSpan2 = document.createElement("span");
+    articalTitleSpan2.className("text-lg");
     articalTitleSpan2.textContent = articleRecord.Title;
     articalTitle.appendChild(articalTitleSpan1);
     articalTitle.appendChild(articalTitleSpan2);
@@ -149,10 +151,10 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
     makeup_content = makeup_content.replace(keyword_regex, match => `<span style='color:orange'>${match}</span>`);
     allMainKeywords.forEach(element => {
-      if (element.key.includes(articleRecord.Main_keyword) || articleRecord.Main_keyword.includes(element.key)) {
+      if (element.key.includes(articleRecord.Main_keyword)) {
 
       } else {
-        const regex = new RegExp(element.key, 'gi');
+        const regex = new RegExp(`\\b${element.key}\\b`, 'gi');
         let isFirst = false;
         makeup_content = makeup_content.replace(regex, match => {
           if (!isFirst) {
