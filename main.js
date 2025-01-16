@@ -14,9 +14,11 @@ initZohoApp = () => {
   }
 };
 let articles = [];
+let allMainKeywords = [];
 fetchArticle = async () => {
   console.log("fetchArticle");
   articles = [];
+  allMainKeywords = [];
   try {
     const articlesResponse = await fetchArticleWithPaginate();
     console.log("fetchArticle/articlesResponse", articlesResponse.length);
@@ -33,6 +35,16 @@ fetchArticle = async () => {
         }
       }
     }
+
+    // xu ly doi mau va gan link
+    allMainKeywords = articles.map(x => {
+      return {
+        key: x.Main_keyword,
+        url: x.Link
+      }
+    });
+
+    allMainKeywords = allMainKeywords.sort((a, b) => b.key.length - a.key.length);
 
     console.log("fetchArticle", articles.length);
     const articleListDiv = document.getElementById("articleList");
@@ -96,7 +108,7 @@ renderArticleHTML = (articleListDiv) => {
   // if(cartOnProcess) return;
   articleListDiv.innerHTML = "";
   let i = 1;
-  for (const article of articles) {
+  for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
     const articalDiv = document.createElement("div");
 
@@ -104,7 +116,7 @@ renderArticleHTML = (articleListDiv) => {
     const articalTitleSpan1 = document.createElement("span");
     articalTitleSpan1.textContent = `${i++}. Tiêu đề: `;
     const articalTitleSpan2 = document.createElement("span");
-    articalTitleSpan2.textContent = article.Title;
+    articalTitleSpan2.textContent = articleRecord.Title;
     articalTitle.appendChild(articalTitleSpan1);
     articalTitle.appendChild(articalTitleSpan2);
     articalDiv.appendChild(articalTitle);
@@ -113,8 +125,8 @@ renderArticleHTML = (articleListDiv) => {
     const articalLinkSpan1 = document.createElement("span");
     articalLinkSpan1.textContent = "Link: ";
     const articalLinkSpan2 = document.createElement("a");
-    articalLinkSpan2.href = article.Link;
-    articalLinkSpan2.textContent = article.Link;
+    articalLinkSpan2.href = articleRecord.Link;
+    articalLinkSpan2.textContent = articleRecord.Link;
     articalLink.appendChild(articalLinkSpan1);
     articalLink.appendChild(articalLinkSpan2);
     articalDiv.appendChild(articalLink);
@@ -124,13 +136,25 @@ renderArticleHTML = (articleListDiv) => {
     const articalKeySpan1 = document.createElement("span");
     articalKeySpan1.textContent = "Main keyword: ";
     const articalKeySpan2 = document.createElement("span");
-    articalKeySpan2.textContent = article.Main_keyword;
+    articalKeySpan2.textContent = articleRecord.Main_keyword;
     articalKey.appendChild(articalKeySpan1);
     articalKey.appendChild(articalKeySpan2);
     articalDiv.appendChild(articalKey);
 
     const articalContent = document.createElement("div");
-    articalContent.textContent = article.Main_content;
+    let makeup_content = articleRecord.Main_content;
+    // makeup_content = makeup_content.replace(articleRecord.Main_keyword, `<span> ${articleRecord.Main_keyword} </span>`)
+    const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
+    makeup_content = makeup_content.replace(keyword_regex, match => `<span style='color:orange'>${match}</span>`);
+    // allMainKeywords.forEach(element => {
+    //   if (element.key === articleRecord.Main_keyword) {
+
+    //   } else {
+
+    //   }
+
+    // });
+    articalContent.textContent = makeup_content;
     articalDiv.appendChild(articalContent);
 
     articleListDiv.appendChild(articalDiv);
