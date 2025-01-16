@@ -20,7 +20,7 @@ fetchArticle = async (angleQuery = '') => {
   articles = [];
   allMainKeywords = [];
   try {
-    const articlesResponse = await fetchArticleWithPaginate(angleQuery);
+    const articlesResponse = await fetchArticleWithPaginate();
     console.log("fetchArticle/articlesResponse", articlesResponse.length);
     Array.prototype.push.apply(articles, articlesResponse);
     if (articlesResponse.length === 200) {
@@ -96,11 +96,11 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
       })
       .catch((err) => {
         console.error("fetchArticleWithPaginate/then", err);
-        cartOnProcess = false;
+        return articlesResponse;
       });
   } catch (err) {
     console.error("fetchArticleWithPaginate", err);
-    cartOnProcess = false;
+    return articlesResponse;
   }
 };
 
