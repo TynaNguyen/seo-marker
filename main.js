@@ -126,6 +126,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articalDiv.appendChild(articalTitle);
 
     const articalLink = document.createElement("p");
+    articalLink.className = "pb-5";
     const articalLinkSpan1 = document.createElement("span");
     articalLinkSpan1.textContent = "Link: ";
     articalLinkSpan1.className = "font-semibold";
@@ -139,6 +140,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
 
 
     const articalKey = document.createElement("p");
+    articalKey.className = "pb-5";
     const articalKeySpan1 = document.createElement("span");
     articalKeySpan1.textContent = "Main keyword: ";
     articalKeySpan1.className = "font-semibold";
