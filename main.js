@@ -8,8 +8,6 @@ initZohoApp = () => {
       console.log("initparams", initparams);
       // getExistedUser(initparams.loginUser);
       userId = initparams.loginUser;
-      await fetchUserCart();
-      await deleteUserCart();
     });
   } catch (err) {
     console.error("initZohoApp", err);
@@ -20,14 +18,14 @@ fetchArticle = async () => {
   console.log("fetchArticle");
   articles = [];
   try {
-    const articlesResponse = fetchArticleWithPaginate();
+    const articlesResponse = await fetchArticleWithPaginate();
     console.log("fetchArticle/articlesResponse", articlesResponse.length);
     Array.prototype.push.apply(articles, articlesResponse);
     if (articlesResponse.length === 200) {
       let page = 1;
       let lastPage = false;
       while (!lastPage) {
-        const newArticlesResponse = fetchArticleWithPaginate(++page);
+        const newArticlesResponse = await fetchArticleWithPaginate(++page);
         console.log("fetchArticle/newArticlesResponse", newArticlesResponse.length);
         Array.prototype.push.apply(articles, newArticlesResponse);
         if (newArticlesResponse.length < 200) {
@@ -79,7 +77,7 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
         } else {
           console.log("fetchArticleWithPaginate/No record");
         }
-        console.log("fetchArticleWithPaginate/articles", articles);
+        console.log("fetchArticleWithPaginate/articles", articlesResponse);
         return articlesResponse;
       })
       .catch((err) => {
