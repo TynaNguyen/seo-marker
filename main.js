@@ -128,6 +128,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     const articalLink = document.createElement("p");
     const articalLinkSpan1 = document.createElement("span");
     articalLinkSpan1.textContent = "Link: ";
+    articalLinkSpan1.className = "font-semibold";
     const articalLinkSpan2 = document.createElement("a");
     articalLinkSpan2.href = articleRecord.Link;
     articalLinkSpan2.textContent = articleRecord.Link;
@@ -139,6 +140,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     const articalKey = document.createElement("p");
     const articalKeySpan1 = document.createElement("span");
     articalKeySpan1.textContent = "Main keyword: ";
+    articalKeySpan1.className = "font-semibold";
     const articalKeySpan2 = document.createElement("span");
     articalKeySpan2.textContent = articleRecord.Main_keyword;
     articalKey.appendChild(articalKeySpan1);
@@ -146,6 +148,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articalDiv.appendChild(articalKey);
 
     const articalContent = document.createElement("div");
+    articalContent.className = "pt-5";
     let makeup_content = articleRecord.Main_content;
     // makeup_content = makeup_content.replace(articleRecord.Main_keyword, `<span> ${articleRecord.Main_keyword} </span>`)
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
