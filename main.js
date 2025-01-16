@@ -115,6 +115,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     const articalDiv = document.createElement("div");
     articalDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
     const articalTitle = document.createElement("p");
+    articalTitle.className = "pt-2";
     const articalTitleSpan1 = document.createElement("span");
     articalTitleSpan1.textContent = `${i}. Tiêu đề: `;
     articalTitleSpan1.className = "font-semibold text-lg";
@@ -126,12 +127,12 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articalDiv.appendChild(articalTitle);
 
     const articalLink = document.createElement("p");
-    articalLink.className = "pb-5";
+    articalLink.className = "pb-2";
     const articalLinkSpan1 = document.createElement("span");
     articalLinkSpan1.textContent = "Link: ";
-    articalLinkSpan1.className = "font-semibold";
+    articalLinkSpan1.className = "font-semibold text-lg";
     const articalLinkSpan2 = document.createElement("a");
-    articalLinkSpan2.className = "text-blue"
+    articalLinkSpan2.className = "text-blue text-lg"
     articalLinkSpan2.href = articleRecord.Link;
     articalLinkSpan2.textContent = articleRecord.Link;
     articalLink.appendChild(articalLinkSpan1);
@@ -140,18 +141,19 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
 
 
     const articalKey = document.createElement("p");
-    articalKey.className = "pb-5";
+    articalKey.className = "pb-2";
     const articalKeySpan1 = document.createElement("span");
     articalKeySpan1.textContent = "Main keyword: ";
-    articalKeySpan1.className = "font-semibold";
+    articalKeySpan1.className = "font-semibold text-lg";
     const articalKeySpan2 = document.createElement("span");
     articalKeySpan2.textContent = articleRecord.Main_keyword;
+    articalKeySpan2.className = "text-lg";
     articalKey.appendChild(articalKeySpan1);
     articalKey.appendChild(articalKeySpan2);
     articalDiv.appendChild(articalKey);
 
     const articalContent = document.createElement("div");
-    articalContent.className = "pt-5";
+    articalContent.className = "pt-2 text-base";
     let makeup_content = articleRecord.Main_content;
     // makeup_content = makeup_content.replace(articleRecord.Main_keyword, `<span> ${articleRecord.Main_keyword} </span>`)
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
