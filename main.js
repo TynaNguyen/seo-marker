@@ -39,8 +39,9 @@ fetchArticle = async () => {
     // xu ly doi mau va gan link
     allMainKeywords = articles.map(x => {
       return {
-        key: x.Main_keyword,
-        url: x.Link
+        key: x.Main_keyword.toLowerCase(),
+        Link: x.Link,
+        count: 0,
       }
     });
 
@@ -146,15 +147,23 @@ renderArticleHTML = (articleListDiv) => {
     // makeup_content = makeup_content.replace(articleRecord.Main_keyword, `<span> ${articleRecord.Main_keyword} </span>`)
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
     makeup_content = makeup_content.replace(keyword_regex, match => `<span style='color:orange'>${match}</span>`);
-    // allMainKeywords.forEach(element => {
-    //   if (element.key === articleRecord.Main_keyword) {
+    allMainKeywords.forEach(element => {
+      if (element.key.includes(articleRecord.Main_keyword)) {
 
-    //   } else {
-
-    //   }
-
-    // });
-    articalContent.textContent = makeup_content;
+      } else {
+        const regex = new RegExp(element.key, 'gi');
+        let isFirst = false;
+        makeup_content = makeup_content.replace(regex, match => {
+          if (!isFirst) {
+            isFirst = true
+            return `<a href="${element.Link}">${match}</a>`;
+          } else {
+            return `<span style='color:pink'>${match}</span>`;
+          }
+        });
+      }
+    });
+    articalContent.innerHTML = makeup_content;
     articalDiv.appendChild(articalContent);
 
     articleListDiv.appendChild(articalDiv);
