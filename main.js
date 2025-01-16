@@ -115,7 +115,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     const articalDiv = document.createElement("div");
     articalDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
     const articalTitle = document.createElement("p");
-    articalTitle.className = "pt-2";
+    articalTitle.className = "pb-2";
     const articalTitleSpan1 = document.createElement("span");
     articalTitleSpan1.textContent = `${i}. Tiêu đề: `;
     articalTitleSpan1.className = "font-semibold text-lg";
