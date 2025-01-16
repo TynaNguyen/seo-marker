@@ -21,12 +21,14 @@ fetchArticle = async () => {
   articles = [];
   try {
     const articlesResponse = fetchArticleWithPaginate();
+    console.log("fetchArticle/articlesResponse", articlesResponse.length);
     Array.prototype.push.apply(articles, articlesResponse);
     if (articlesResponse.length === 200) {
       let page = 1;
       let lastPage = false;
       while (!lastPage) {
         const newArticlesResponse = fetchArticleWithPaginate(++page);
+        console.log("fetchArticle/newArticlesResponse", newArticlesResponse.length);
         Array.prototype.push.apply(articles, newArticlesResponse);
         if (newArticlesResponse.length < 200) {
           lastPage = true;
@@ -34,6 +36,7 @@ fetchArticle = async () => {
       }
     }
 
+    console.log("fetchArticle", articles.length);
     const articleListDiv = document.getElementById("articleList");
     if (articleListDiv) {
       renderArticleHTML(articleListDiv);
@@ -64,7 +67,7 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
         console.log("fetchArticleWithPaginate/response ==>", response);
         if (response.code === 3000 && response.data.length > 0) {
           for (const angle of response.data) {
-            articles.push({
+            articlesResponse.push({
               ID: angle.ID,
               Main_keyword: angle.Main_keyword,
               Title: angle.Title,
