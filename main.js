@@ -70,7 +70,7 @@ fetchArticleWithPaginate = async (angleQuery = '', page = 1, pageSize = 200) => 
     pageSize: `${pageSize}`,
   };
   if (angleQuery.length > 0) {
-    config.criteria = `(angle = ${angleQuery})`;
+    config.criteria = `(angle = "${angleQuery}")`;
   }
   console.log("fetchArticleWithPaginate", config);
   try {
@@ -88,7 +88,7 @@ fetchArticleWithPaginate = async (angleQuery = '', page = 1, pageSize = 200) => 
               Link: angle.Link,
               Main_content: angle.Main_content,
               Makeup_content: "",
-              Angle: angle.Angle,
+              Angle: angle.Angle.ID,
             });
           }
         } else {
