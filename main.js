@@ -113,7 +113,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
     const articalDiv = document.createElement("div");
-    articalDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-[0px 30px 79.1px -36px rgba(0, 0, 0, 0.16)]";
+    articalDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
     const articalTitle = document.createElement("p");
     const articalTitleSpan1 = document.createElement("span");
     articalTitleSpan1.textContent = `${i}. Tiêu đề: `;
