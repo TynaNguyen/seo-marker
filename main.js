@@ -64,7 +64,7 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
   const articlesResponse = [];
   //configuration json
   config = {
-    appName: "mini-zalo-app-connection",
+    appName: "seo-remarker",
     reportName: "SEO_Remaker_Report",
     page: `${page}`,
     pageSize: `${pageSize}`,
