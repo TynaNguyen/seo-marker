@@ -149,7 +149,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
     makeup_content = makeup_content.replace(keyword_regex, match => `<span style='color:orange'>${match}</span>`);
     allMainKeywords.forEach(element => {
-      if (element.key.includes(articleRecord.Main_keyword)) {
+      if (element.key.includes(articleRecord.Main_keyword) || articleRecord.Main_keyword.includes(element.key)) {
 
       } else {
         const regex = new RegExp(element.key, 'gi');
