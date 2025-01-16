@@ -69,14 +69,14 @@ fetchArticleWithPaginate = async (page = 1, pageSize = 200) => {
     page: `${page}`,
     pageSize: `${pageSize}`,
   };
-  console.log("fetchArticleWithPaginate", config);
+  console.log("fetchArticleWithPaginate/config", config);
   try {
     //get all records API
     return ZOHO.CREATOR.API.getAllRecords(config)
       .then(async function (response, error) {
         console.log("fetchArticleWithPaginate/error ==>", error);
         console.log("fetchArticleWithPaginate/response ==>", response);
-        if (response.code === 3000 && response.data.length > 0) {
+        if (response.code === 3000 && response.data && response.data.length > 0) {
           for (const angle of response.data) {
             articlesResponse.push({
               ID: angle.ID,
@@ -166,7 +166,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '') => {
     });
     articalContent.innerHTML = makeup_content;
     articalDiv.appendChild(articalContent);
-    if (angleQueryID.length === 0 || articleRecord.Angle === angleQueryID) {
+    if (!angleQueryID || angleQueryID.length === 0 || articleRecord.Angle === angleQueryID) {
       articleListDiv.appendChild(articalDiv);
     }
 
