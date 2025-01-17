@@ -128,7 +128,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articalTitle.appendChild(articalTitleSpan1);
     articalTitle.appendChild(articalTitleSpan2);
     articalDiv.appendChild(articalTitle);
-    articalEdit.appendChild(articalDiv);
+
 
     const articalLink = document.createElement("p");
     articalLink.className = "pb-2";
@@ -158,6 +158,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
 
     const articalContent = document.createElement("div");
     articalContent.className = "pt-2 text-base";
+    articalEdit.appendChild(articalDiv);
     let makeup_content = articleRecord.Main_content;
     // makeup_content = makeup_content.replace(articleRecord.Main_keyword, `<span> ${articleRecord.Main_keyword} </span>`)
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
@@ -183,7 +184,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     if (!angleQueryID || angleQueryID.length === 0 || articleRecord.Angle === angleQueryID) {
       if (!keySearch || keySearch.length === 0 || containsKeyword(articleRecord.Title, keySearch)) {
         i++;
-        articleListDiv.appendChild(articalDiv);
+        articleListDiv.appendChild(articalEdit);
       }
     }
 
