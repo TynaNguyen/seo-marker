@@ -19,9 +19,35 @@
         <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.2/i18nextHttpBackend.min.js"></script>
         <script type="text/javascript" src="main.js"></script>
+        <style>
+            /* Style for the popup form */
+            .popup-form {
+                display: none;
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                border: 1px solid #ccc;
+                padding: 20px;
+                background-color: white;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .popup-form.active {
+                display: block;
+            }
+        </style>
     </head>
     <body>
         <div id="articleList"></div>
+
+    <div id="popupForm" class="popup-form">
+        <h2>Edit Data</h2>
+        <form id="editForm">
+            <label for="dataInput">Data:</label>
+            <input type="text" id="dataInput" name="data">
+            <button type="submit">Save</button>
+        </form>
+    </div>
     </body>
     
     <script >
@@ -48,6 +74,7 @@
                 catch (err) {
                 console.error('initZohoApp', err);
             }
+
         });
         
     </script>

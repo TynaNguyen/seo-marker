@@ -112,53 +112,56 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   let i = 1;
   for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
-    const articalEdit = document.createElement("a");
-    articalEdit.href = `https://creatorapp.zoho.com/tsxcorp/seo-remarker/#Form:SEO_Remaker?recLinkID=${articleRecord.ID}&viewLinkName=SEO_Remaker_Report`;
-    articalEdit.target = "_blank";
-    const articalDiv = document.createElement("div");
-    articalDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
-    const articalTitle = document.createElement("p");
-    articalTitle.className = "pb-2";
-    const articalTitleSpan1 = document.createElement("span");
-    articalTitleSpan1.textContent = `${i}. Tiêu đề: `;
-    articalTitleSpan1.className = "font-semibold text-lg";
-    const articalTitleSpan2 = document.createElement("span");
-    articalTitleSpan2.className = "text-lg";
-    articalTitleSpan2.textContent = articleRecord.Title;
-    articalTitle.appendChild(articalTitleSpan1);
-    articalTitle.appendChild(articalTitleSpan2);
-    articalDiv.appendChild(articalTitle);
+    const articleDiv = document.createElement("div");
+    articleDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
+    const articleTitle = document.createElement("p");
+    articleTitle.className = "pb-2";
+    const articleTitleSpan1 = document.createElement("span");
+    articleTitleSpan1.textContent = `${i}. Tiêu đề: `;
+    articleTitleSpan1.className = "font-semibold text-lg";
+    const articleTitleSpan2 = document.createElement("span");
+    articleTitleSpan2.className = "text-lg";
+    articleTitleSpan2.textContent = articleRecord.Title;
+    const articleEditButton = document.createElement("button");
+    articleEditButton.textContent = "Edit";
+    articleEditButton.addEventListener('click', function () {
+      document.getElementById('popupForm').classList.add('active');
+    });
+
+    articleTitle.appendChild(articleTitleSpan1);
+    articleTitle.appendChild(articleTitleSpan2);
+    articleTitle.appendChild(articleEditButton);
+    articleDiv.appendChild(articleTitle);
 
 
-    const articalLink = document.createElement("p");
-    articalLink.className = "pb-2";
-    const articalLinkSpan1 = document.createElement("span");
-    articalLinkSpan1.textContent = "Link: ";
-    articalLinkSpan1.className = "font-semibold text-lg";
-    const articalLinkSpan2 = document.createElement("a");
-    articalLinkSpan2.className = "text-blue text-lg"
-    articalLinkSpan2.href = articleRecord.Link;
-    articalLinkSpan2.textContent = articleRecord.Link;
-    articalLink.appendChild(articalLinkSpan1);
-    articalLink.appendChild(articalLinkSpan2);
-    articalDiv.appendChild(articalLink);
+    const articleLink = document.createElement("p");
+    articleLink.className = "pb-2";
+    const articleLinkSpan1 = document.createElement("span");
+    articleLinkSpan1.textContent = "Link: ";
+    articleLinkSpan1.className = "font-semibold text-lg";
+    const articleLinkSpan2 = document.createElement("a");
+    articleLinkSpan2.className = "text-blue text-lg"
+    articleLinkSpan2.href = articleRecord.Link;
+    articleLinkSpan2.textContent = articleRecord.Link;
+    articleLink.appendChild(articleLinkSpan1);
+    articleLink.appendChild(articleLinkSpan2);
+    articleDiv.appendChild(articleLink);
 
 
-    const articalKey = document.createElement("p");
-    articalKey.className = "pb-2";
-    const articalKeySpan1 = document.createElement("span");
-    articalKeySpan1.textContent = "Main keyword: ";
-    articalKeySpan1.className = "font-semibold text-lg";
-    const articalKeySpan2 = document.createElement("span");
-    articalKeySpan2.textContent = articleRecord.Main_keyword;
-    articalKeySpan2.className = "text-lg";
-    articalKey.appendChild(articalKeySpan1);
-    articalKey.appendChild(articalKeySpan2);
-    articalDiv.appendChild(articalKey);
+    const articleKey = document.createElement("p");
+    articleKey.className = "pb-2";
+    const articleKeySpan1 = document.createElement("span");
+    articleKeySpan1.textContent = "Main keyword: ";
+    articleKeySpan1.className = "font-semibold text-lg";
+    const articleKeySpan2 = document.createElement("span");
+    articleKeySpan2.textContent = articleRecord.Main_keyword;
+    articleKeySpan2.className = "text-lg";
+    articleKey.appendChild(articleKeySpan1);
+    articleKey.appendChild(articleKeySpan2);
+    articleDiv.appendChild(articleKey);
 
-    const articalContent = document.createElement("div");
-    articalContent.className = "pt-2 text-base";
-    articalEdit.appendChild(articalDiv);
+    const articleContent = document.createElement("div");
+    articleContent.className = "pt-2 text-base";
     let makeup_content = articleRecord.Main_content;
     // makeup_content = makeup_content.replace(articleRecord.Main_keyword, `<span> ${articleRecord.Main_keyword} </span>`)
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
@@ -179,22 +182,33 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
         });
       }
     });
-    articalContent.innerHTML = makeup_content;
-    articalDiv.appendChild(articalContent);
+    articleContent.innerHTML = makeup_content;
+    articleDiv.appendChild(articleContent);
+
+    editButton
+    // const articleEdit = document.createElement("a");
+    // articleEdit.href = `https://creatorapp.zoho.com/tsxcorp/seo-remarker/#Form:SEO_Remaker?recLinkID=${articleRecord.ID}&viewLinkName=SEO_Remaker_Report`;
+    // articleEdit.target = "_blank";
+    // articleEdit.appendChild(articleDiv);
     if (!angleQueryID || angleQueryID.length === 0 || articleRecord.Angle === angleQueryID) {
       if (!keySearch || keySearch.length === 0 || containsKeyword(articleRecord.Title, keySearch)) {
         i++;
-        articleListDiv.appendChild(articalEdit);
+        articleListDiv.appendChild(articleDiv);
       }
     }
-
-
-
-
-
-
   }
 }
+
+document.getElementById('editButton').addEventListener('click', function () {
+  document.getElementById('popupForm').classList.add('active');
+});
+
+document.getElementById('editForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const data = document.getElementById('dataInput').value;
+  console.log('Data saved:', data);
+  document.getElementById('popupForm').classList.remove('active');
+});
 
 containsKeyword = (text, keyword) => {
   const regex = new RegExp(keyword, 'i');
