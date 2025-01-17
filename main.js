@@ -199,11 +199,8 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   }
 }
 
-document.getElementById('editButton').addEventListener('click', function () {
-  document.getElementById('popupForm').classList.add('active');
-});
-
 document.getElementById('editForm').addEventListener('submit', function (event) {
+  alert('submit')
   event.preventDefault();
   const data = document.getElementById('dataInput').value;
   console.log('Data saved:', data);
