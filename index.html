@@ -40,14 +40,14 @@
     <body>
         <div id="articleList"></div>
 
-    <div id="popupForm" class="popup-form">
+    <!-- <div id="popupForm" class="popup-form">
         <h2>Edit Data</h2>
         <form id="editForm">
             <label for="dataInput">Data:</label>
             <input type="text" id="dataInput" name="data">
             <button type="submit">Save</button>
         </form>
-    </div>
+    </div> -->
     </body>
     
     <script >
@@ -74,6 +74,14 @@
                 catch (err) {
                 console.error('initZohoApp', err);
             }
+
+            // document.getElementById('editForm').addEventListener('submit', function (event) {
+            //     alert('submit')
+            //     event.preventDefault();
+            //     const data = document.getElementById('dataInput').value;
+            //     console.log('Data saved:', data);
+            //     document.getElementById('popupForm').classList.remove('active');
+            // });
 
         });
         

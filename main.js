@@ -112,6 +112,8 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   let i = 1;
   for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
+
+    const urlEdit = `https://creatorapp.zoho.com/tsxcorp/seo-remarker/#Form:SEO_Remaker?recLinkID=${articleRecord.ID}&viewLinkName=SEO_Remaker_Report`;
     const articleDiv = document.createElement("div");
     articleDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
     const articleTitle = document.createElement("p");
@@ -124,8 +126,10 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articleTitleSpan2.textContent = articleRecord.Title;
     const articleEditButton = document.createElement("button");
     articleEditButton.textContent = "Edit";
+    articleTitleSpan2.className = "pl-5";
     articleEditButton.addEventListener('click', function () {
-      document.getElementById('popupForm').classList.add('active');
+      window.open(urlEdit, '_blank');
+      // document.getElementById('popupForm').classList.add('active');
     });
 
     articleTitle.appendChild(articleTitleSpan1);
@@ -197,14 +201,6 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     }
   }
 }
-
-document.getElementById('editForm').addEventListener('submit', function (event) {
-  alert('submit')
-  event.preventDefault();
-  const data = document.getElementById('dataInput').value;
-  console.log('Data saved:', data);
-  document.getElementById('popupForm').classList.remove('active');
-});
 
 containsKeyword = (text, keyword) => {
   const regex = new RegExp(keyword, 'i');
