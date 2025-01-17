@@ -112,6 +112,9 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   let i = 1;
   for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
+    const articalEdit = document.createElement("a");
+    articalEdit.href = `https://creatorapp.zoho.com/tsxcorp/seo-remarker/#Form:SEO_Remaker?recLinkID=${element.ID}&viewLinkName=SEO_Remaker_Report`;
+    articalEdit.target = "_blank";
     const articalDiv = document.createElement("div");
     articalDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
     const articalTitle = document.createElement("p");
@@ -125,6 +128,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articalTitle.appendChild(articalTitleSpan1);
     articalTitle.appendChild(articalTitleSpan2);
     articalDiv.appendChild(articalTitle);
+    articalEdit.appendChild(articalDiv);
 
     const articalLink = document.createElement("p");
     articalLink.className = "pb-2";
