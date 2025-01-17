@@ -185,7 +185,6 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articleContent.innerHTML = makeup_content;
     articleDiv.appendChild(articleContent);
 
-    editButton
     // const articleEdit = document.createElement("a");
     // articleEdit.href = `https://creatorapp.zoho.com/tsxcorp/seo-remarker/#Form:SEO_Remaker?recLinkID=${articleRecord.ID}&viewLinkName=SEO_Remaker_Report`;
     // articleEdit.target = "_blank";
