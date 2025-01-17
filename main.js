@@ -113,7 +113,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
   for (const articleRecord of articles) {
     // Tạo phần tử div chứa thông tin sản phẩm
     const articalEdit = document.createElement("a");
-    articalEdit.href = `https://creatorapp.zoho.com/tsxcorp/seo-remarker/#Form:SEO_Remaker?recLinkID=${element.ID}&viewLinkName=SEO_Remaker_Report`;
+    articalEdit.href = `https://creatorapp.zoho.com/tsxcorp/seo-remarker/#Form:SEO_Remaker?recLinkID=${articleRecord.ID}&viewLinkName=SEO_Remaker_Report`;
     articalEdit.target = "_blank";
     const articalDiv = document.createElement("div");
     articalDiv.className = "p-8 m-[24px] rounded-2xl border border-[#EBEBEB] bg-[#FFF] shadow-lg";
