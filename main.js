@@ -126,7 +126,7 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
     articleTitleSpan2.textContent = articleRecord.Title;
     const articleEditButton = document.createElement("button");
     articleEditButton.textContent = "Edit";
-    articleTitleSpan2.className = "pl-5";
+    articleEditButton.className = "pl-5";
     articleEditButton.addEventListener('click', function () {
       window.open(urlEdit, '_blank');
       // document.getElementById('popupForm').classList.add('active');
@@ -166,26 +166,29 @@ renderArticleHTML = (articleListDiv, angleQueryID = '', keySearch = '') => {
 
     const articleContent = document.createElement("div");
     articleContent.className = "pt-2 text-base";
+
     let makeup_content = articleRecord.Main_content;
     // makeup_content = makeup_content.replace(articleRecord.Main_keyword, `<span> ${articleRecord.Main_keyword} </span>`)
     const keyword_regex = new RegExp(articleRecord.Main_keyword, 'gi');
-    makeup_content = makeup_content.replace(keyword_regex, match => `<span style='color:orange'>${match}</span>`);
-    allMainKeywords.forEach(element => {
-      if (element.key.includes(articleRecord.Main_keyword)) {
+    if (makeup_content) {
+      makeup_content = makeup_content.replace(keyword_regex, match => `<span style='color:orange'>${match}</span>`);
+      allMainKeywords.forEach(element => {
+        if (element.key.includes(articleRecord.Main_keyword)) {
 
-      } else {
-        const regex = new RegExp(`\\b${element.key}\\b`, 'gi');
-        let isFirst = false;
-        makeup_content = makeup_content.replace(regex, match => {
-          if (!isFirst) {
-            isFirst = true
-            return `<a style="color:blue;text-decoration: underline;" href="${element.Link}">${match}</a>`;
-          } else {
-            return `<span style='color:pink'>${match}</span>`;
-          }
-        });
-      }
-    });
+        } else {
+          const regex = new RegExp(`\\b${element.key}\\b`, 'gi');
+          let isFirst = false;
+          makeup_content = makeup_content.replace(regex, match => {
+            if (!isFirst) {
+              isFirst = true
+              return `<a style="color:blue;text-decoration: underline;" href="${element.Link}">${match}</a>`;
+            } else {
+              return `<span style='color:pink'>${match}</span>`;
+            }
+          });
+        }
+      });
+    }
     articleContent.innerHTML = makeup_content;
     articleDiv.appendChild(articleContent);
 
